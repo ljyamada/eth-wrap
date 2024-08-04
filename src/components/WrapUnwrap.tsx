@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Button, Input, Box } from '@chakra-ui/react';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
-import { ethers } from 'ethers';
+import { useSendTransaction } from 'wagmi';
+import {AbstractSigner, ethers, Provider} from 'ethers';
 
 export const WrapUnwrap: React.FC = () => {
     const { address, isConnected } = useAccount();
@@ -9,26 +10,13 @@ export const WrapUnwrap: React.FC = () => {
     const { disconnect } = useDisconnect();
     const [signer, setSigner] = useState<ethers.Signer | null>(null);
     const [amount, setAmount] = useState('');
-
-    // useEffect(() => {
-    //     const getSigner = async () => {
-    //         if (isConnected) {
-    //             const provider = ethers.getDefaultProvider('mainnet')
-    //             const signer = provider.getSigner();
-    //             setSigner(signer);
-    //         }
-    //     };
-    //     getSigner();
-    // }, [isConnected]);
+    const { sendTransaction } = useSendTransaction()
 
     const handleWrap = async () => {
-        if (signer) {
-            const tx = await signer.sendTransaction({
-                to: '0x...', // Replace with the actual WETH contract address
-                value: ethers.parseEther(amount),
-            });
-            await tx.wait();
-        }
+        sendTransaction({
+            to: '0xd2135CfB216b74109775236E36d4b433F1DF507B',
+            value: ethers.parseEther(amount),
+        })
     };
 
     const handleUnwrap = async () => {
