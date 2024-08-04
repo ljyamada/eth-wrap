@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/eth-wrap/static/js/main.aa729000.js",
+    "index.html": "/eth-wrap/index.html",
+    "main.aa729000.js.map": "/eth-wrap/static/js/main.aa729000.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.aa729000.js"
+  ]
+}
